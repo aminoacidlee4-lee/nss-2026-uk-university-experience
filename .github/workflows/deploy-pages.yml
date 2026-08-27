@@ -28,7 +28,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build static site
-        run: npm run build
+        # The public repository already contains the audited, per-provider JSON
+        # generated from the full NSS source workbook. The original audit file
+        # is intentionally not published, so CI builds only the static app.
+        run: npm run typecheck && npx vite build
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
